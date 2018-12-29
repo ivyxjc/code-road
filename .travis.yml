@@ -1,0 +1,29 @@
+language: java
+
+notifications:
+  email: false
+
+sudo: false
+
+jdk:
+  - oraclejdk8
+
+before_install:
+  - chmod +x gradlew
+
+script:
+  - ./gradlew assemble --full-stacktrace
+  - ./gradlew clean build -x test --full-stacktrace
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+after_success:
+  - ./gradlew jacocoTestCoverageVerification --full-stacktrace
+  - ./gradlew jacocoTestReport --full-stacktrace
+  - ./gradlew sonarqube -Dsonar.organization=ivyxjc-github  -Dsonar.login=$ivyxjcSonar  -Dsonar.host.url=https://sonarcloud.io --full-stacktrace
