@@ -6,19 +6,21 @@ plugins {
     id "org.springframework.boot" version '2.1.1.RELEASE' apply false
     id "io.spring.dependency-management" version "1.0.6.RELEASE" apply false
     id 'net.ltgt.apt' version '0.10' apply false
+
 }
 
 ext {
     spring_boot_version = '2.1.1.RELEASE'
     kotlin_version = '1.3.11'
     junit_version = '4.12'
-    base_version = '0.0.2-SNAPSHOT'
+    base_version = '0.0.1-SNAPSHOT'
     commons_lang3_version = '3.7'
     slf4j_version = '1.7.25'
     log4j_slf4j_version = '2.11.0'
     guava_version = '27.0.1-jre'
-    lombok_version = '1.16.20'
-
+    lombok_version = '1.18.4'
+    mockito_version = '2.23.4'
+    mockito_kotlin_version = '1.6.0'
     hibernate_version = '5.4.0.Final'
 }
 
@@ -27,35 +29,31 @@ version base_version
 
 configure(allprojects) { project ->
     group = 'xyz.ivyxjc'
-    version = base_version
 
     apply plugin: 'java'
     apply plugin: 'org.jetbrains.kotlin.jvm'
     apply plugin: 'net.ltgt.apt'
-    if (name == "pubg4j-web") {
-        apply plugin: 'io.spring.dependency-management'
-        apply plugin: "net.saliman.cobertura"
-        apply plugin: "org.sonarqube"
-        apply plugin: "org.springframework.boot"
-    }
 
-    sourceCompatibility = 1.8
+    sourceCompatibility = JavaVersion.VERSION_11
 
     repositories {
         mavenLocal()
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://projectlombok.org/edge-releases' }
         mavenCentral()
     }
 
+    buildDir = "${rootProject.projectDir.path}/build/${rootProject.name}/${project.name}"
+
     compileJava {
-        sourceCompatibility = 1.8 // can be switched to 11 for testing
-        targetCompatibility = 1.8
+        sourceCompatibility = JavaVersion.VERSION_11 // can be switched to 11 for testing
+        targetCompatibility = JavaVersion.VERSION_11
         options.encoding = "UTF-8"
     }
 
     compileTestJava {
-        sourceCompatibility = 1.8 // can be switched to 11 for testing
-        targetCompatibility = 1.8
+        sourceCompatibility = JavaVersion.VERSION_11  // can be switched to 11 for testing
+        targetCompatibility = JavaVersion.VERSION_11
         options.encoding = "UTF-8"
         options.compilerArgs += "-parameters"
     }
@@ -87,10 +85,10 @@ configure(allprojects) { project ->
         testImplementation(group: 'junit', name: 'junit', version: junit_version) {
             exclude group: "org.hamcrest", module: "hamcrest-core"
         }
-        testImplementation(group: 'org.mockito', name: 'mockito-core', version: '2.23.4') {
+        testImplementation(group: 'org.mockito', name: 'mockito-core', version: mockito_version) {
             exclude group: "org.hamcrest", module: "hamcrest-core"
         }
-        testImplementation(group: 'com.nhaarman', name: 'mockito-kotlin', version: '1.6.0') {
+        testImplementation(group: 'com.nhaarman', name: 'mockito-kotlin', version: mockito_kotlin_version) {
             exclude module: "kotlin-stdlib"
             exclude module: "kotlin-reflect"
             exclude module: "mockito-core"
@@ -108,8 +106,9 @@ configure(allprojects) { project ->
         //guava
         implementation group: 'com.google.guava', name: 'guava', version: guava_version
 
+
         //lombok
-        implementation group: 'org.projectlombok', name: 'lombok', version: lombok_version
+        compileOnly group: 'org.projectlombok', name: 'lombok', version: lombok_version
         annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
 
         compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
