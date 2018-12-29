@@ -1,3 +1,5 @@
 rootProject.name = 'code-road'
+
 include 'hibernate-demo'
+include 'spring-security-demo'
 
