@@ -4,3 +4,5 @@ include 'hibernate-demo'
 include 'spring-security-demo'
 include 'vertx-demo'
 include "sort-samples"
+include "spring-transaction"
+
