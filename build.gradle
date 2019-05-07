@@ -117,9 +117,12 @@ configure(allprojects) { project ->
         implementation group: 'com.google.guava', name: 'guava', version: guava_version
 
 
+        /*
+         * Not to use lombok when Kotlin is used. This is determined by module
+         */
         //lombok
-        compileOnly group: 'org.projectlombok', name: 'lombok', version: lombok_version
-        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
+//        implementation group: 'org.projectlombok', name: 'lombok', version: lombok_version
+//        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
 
         compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
         testCompileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
