@@ -1,11 +1,14 @@
 package xyz.ivyxjc.coderoad.spring.transaction.model;
 
-
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Trans extends BaseBean {
 
