@@ -17,5 +17,9 @@ dependencies {
      * spring boot end
      */
 
+    //lombok
+    implementation group: 'org.projectlombok', name: 'lombok', version: lombok_version
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
+
     runtime group: 'com.h2database', name: 'h2', version: h2_version
 }
