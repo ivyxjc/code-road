@@ -33,6 +33,7 @@ private.yaml
 *.log.gz
 kafka_client_jaas.conf
 application-private.yaml
+lombok.config
 
 out/
 build/
