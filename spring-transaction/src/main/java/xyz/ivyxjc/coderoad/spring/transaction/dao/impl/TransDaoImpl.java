@@ -1,17 +1,15 @@
 package xyz.ivyxjc.coderoad.spring.transaction.dao.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import xyz.ivyxjc.coderoad.spring.transaction.dao.TransDao;
 import xyz.ivyxjc.coderoad.spring.transaction.model.Trans;
+
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 public class TransDaoImpl implements TransDao {
@@ -37,7 +35,8 @@ public class TransDaoImpl implements TransDao {
         map.put("TRANS_ID", trans.getTransId());
         map.put("TRANS_AMOUNT", trans.getTransAmount());
         map.put("TRANS_DATE", trans.getTransDate());
-        return jdbcTemplate.update(INSERT_TRANS, map);
+        int res = jdbcTemplate.update(INSERT_TRANS, map);
+        return res;
     }
 
     @Override

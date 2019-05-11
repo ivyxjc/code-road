@@ -1,19 +1,19 @@
 package xyz.ivyxjc.coderoad.spring.transaction.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.transaction.annotation.Transactional;
 import xyz.ivyxjc.coderoad.spring.transaction.dao.ExtDao;
 import xyz.ivyxjc.coderoad.spring.transaction.model.Ext;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 public class ExtDaoImpl implements ExtDao {
@@ -49,6 +49,7 @@ public class ExtDaoImpl implements ExtDao {
         return null;
     }
 
+    @Transactional
     @Override
     public int insertExt(@Nullable Ext ext) {
         Map<String, Object> map = new HashMap<>();
