@@ -1,6 +1,8 @@
 rootProject.name = 'code-road'
 
 include 'hibernate-demo'
+include "ivy-benchmark"
+include "ivy-leaf"
 include 'spring-security-demo'
 include 'vertx-demo'
 include "sort-samples"

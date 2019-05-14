@@ -7,6 +7,7 @@ plugins {
     id "org.springframework.boot" version '2.1.1.RELEASE' apply false
     id "io.spring.dependency-management" version "1.0.6.RELEASE" apply false
     id "io.freefair.lombok" version "3.4.0" apply false
+    id "me.champeau.gradle.jmh" version "0.4.8" apply false
 }
 
 task hello {
@@ -29,6 +30,7 @@ ext {
     mockito_kotlin_version = '1.6.0'
     hibernate_version = '5.4.0.Final'
     h2_version = '1.4.197'
+    jmh_version = '1.21'
 }
 
 group 'xyz.ivyxjc'
@@ -149,6 +151,24 @@ project("hibernate-demo") {
         implementation group: 'org.projectlombok', name: 'lombok', version: lombok_version
         annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
     }
+}
+
+project("ivy-benchmark") {
+    apply plugin: "me.champeau.gradle.jmh"
+
+    dependencies {
+        jmh project(":ivy-leaf")
+
+        //jmh
+        jmh group: 'org.openjdk.jmh', name: 'jmh-core', version: jmh_version
+        jmh group: 'org.openjdk.jmh',
+                name: 'jmh-generator-annprocess',
+                version: jmh_version
+    }
+}
+
+project("ivy-leaf") {
+
 }
 
 project("spring-security-demo") {
