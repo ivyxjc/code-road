@@ -152,6 +152,10 @@ project("hibernate-demo") {
 }
 
 project("netty-demo") {
+    dependencies{
+        implementation group: 'io.netty', name: 'netty-all', version: '4.1.36.Final'
+    }
+    
 
 }
 
