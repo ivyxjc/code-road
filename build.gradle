@@ -8,6 +8,7 @@ plugins {
     id "io.spring.dependency-management" version "1.0.6.RELEASE" apply false
     id "io.freefair.lombok" version "3.4.0" apply false
     id "me.champeau.gradle.jmh" version "0.4.8" apply false
+    id "io.morethan.jmhreport" version "0.9.0" apply false
 }
 
 task hello {
@@ -155,6 +156,20 @@ project("hibernate-demo") {
 
 project("ivy-benchmark") {
     apply plugin: "me.champeau.gradle.jmh"
+    apply plugin: "io.morethan.jmhreport"
+
+    jmhReport {
+        jmhResultPath = project.file("${rootProject.projectDir.path}/build/${rootProject.name}/${project.name}/reports/jmh/results.json")
+        jmhReportOutput = project.file("${rootProject.projectDir.path}/build/${rootProject.name}/${project.name}/reports/jmh/")
+    }
+
+    jmh {
+        fork = 1
+        threads = 8
+        warmupIterations = 3
+        iterations = 5
+        resultFormat = 'JSON'
+    }
 
     dependencies {
         jmh project(":ivy-leaf")
