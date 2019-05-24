@@ -37,3 +37,5 @@ lombok.config
 out/
 build/
 logs/
+
+private.properties
