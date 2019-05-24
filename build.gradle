@@ -88,8 +88,10 @@ configure(allprojects) { project ->
         }
     }
 
-    sourceSets.main.resources.srcDirs += "${rootProject.projectDir.path}/src/main/resources"
-    sourceSets.test.resources.srcDirs += "${rootProject.projectDir.path}/src/test/resources"
+    if (!name.equals('deep-in-log')) {
+        sourceSets.main.resources.srcDirs += "${rootProject.projectDir.path}/src/main/resources"
+        sourceSets.test.resources.srcDirs += "${rootProject.projectDir.path}/src/test/resources"
+    }
 
 
     configurations {
@@ -145,6 +147,12 @@ sonarqube {
             property "sonar.tests", "src/test"
             property "sonar.jacoco.reportPaths", "$buildDir/customJacocoReportDir"
         }
+    }
+}
+
+
+project("deep-in-log") {
+    dependencies {
     }
 }
 
