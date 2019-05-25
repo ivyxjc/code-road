@@ -15,10 +15,10 @@ import java.util.Map;
 public class TransDaoImpl implements TransDao {
     private static final String QUERY_BY_GUID = "select * from TRANS where GUID=:GUID";
     private static final String UPDATE_BY_GUID =
-        "update TRANS set TRANS_AMOUNT=:TRANS_AMOUNT, TRANS_DATE=:TRANS_DATE,UPDATED_AT=sysdate(),UPDATED_BY=user() where GUID=:GUID";
+            "update TRANS set TRANS_AMOUNT=:TRANS_AMOUNT, TRANS_DATE=:TRANS_DATE,UPDATED_AT=sysdate(),UPDATED_BY=user() where GUID=:GUID";
     private static final String INSERT_TRANS =
-        "insert into TRANS (GUID, TRANS_ID, TRANS_AMOUNT, TRANS_DATE, CREATED_AT, CREATED_BY) "
-            + "VALUE  (:GUID, :TRANS_ID, :TRANS_AMOUNT, :TRANS_DATE, sysdate(), user())";
+            "insert into TRANS (GUID, TRANS_ID, TRANS_AMOUNT, TRANS_DATE, CREATED_AT, CREATED_BY) "
+                    + "VALUE  (:GUID, :TRANS_ID, :TRANS_AMOUNT, :TRANS_DATE, sysdate(), user())";
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -30,6 +30,9 @@ public class TransDaoImpl implements TransDao {
 
     @Override
     public int insertTrans(@Nullable Trans trans) {
+        if (trans == null) {
+            return -1;
+        }
         Map<String, Object> map = new HashMap<>();
         map.put("GUID", trans.getGuid());
         map.put("TRANS_ID", trans.getTransId());

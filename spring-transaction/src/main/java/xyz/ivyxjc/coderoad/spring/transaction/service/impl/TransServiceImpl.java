@@ -1,5 +1,6 @@
 package xyz.ivyxjc.coderoad.spring.transaction.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import xyz.ivyxjc.coderoad.spring.transaction.model.Ext;
 import xyz.ivyxjc.coderoad.spring.transaction.model.Trans;
 import xyz.ivyxjc.coderoad.spring.transaction.service.TransService;
 
+@Slf4j
 @Service
 public class TransServiceImpl implements TransService {
 
@@ -38,9 +40,9 @@ public class TransServiceImpl implements TransService {
             Thread.sleep(2000);
             TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("thread sleep throw exceptions", e);
         }
-        return transRes == transRes && transRes == 1 ? 1 : -1;
+        return transRes == 1 ? 1 : -1;
     }
 
     @Override
