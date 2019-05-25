@@ -5,6 +5,7 @@ include 'deep-in-log'
 include 'hibernate-demo'
 include "ivy-benchmark"
 include "ivy-leaf"
+include "java-basic"
 include "kafka-demo"
 include 'spring-security-demo'
 include 'vertx-demo'
