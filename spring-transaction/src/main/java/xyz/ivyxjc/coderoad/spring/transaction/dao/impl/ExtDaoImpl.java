@@ -19,10 +19,10 @@ import java.util.Map;
 public class ExtDaoImpl implements ExtDao {
     private static final String QUERY_BY_GUID = "select * from EXT where GUID=:GUID";
     private static final String UPDATE_BY_GUID =
-        "update EXT set EXT_AMOUNT=:EXT_AMOUNT, EXT_DATE=:EXT_DATE,UPDATED_AT=sysdate(),UPDATED_BY=user() where GUID=:GUID";
+            "update EXT set EXT_AMOUNT=:EXT_AMOUNT, EXT_DATE=:EXT_DATE,UPDATED_AT=sysdate(),UPDATED_BY=user() where GUID=:GUID";
     private static final String INSERT_EXT =
-        "insert into EXT (GUID, EXT_ID, EXT_AMOUNT, EXT_DATE, CREATED_AT, CREATED_BY) "
-            + "VALUE  (:GUID, :EXT_ID, :EXT_AMOUNT, :EXT_DATE, sysdate(), user())";
+            "insert into EXT (GUID, EXT_ID, EXT_AMOUNT, EXT_DATE, CREATED_AT, CREATED_BY) "
+                    + "VALUE  (:GUID, :EXT_ID, :EXT_AMOUNT, :EXT_DATE, sysdate(), user())";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -53,6 +53,9 @@ public class ExtDaoImpl implements ExtDao {
     @Override
     public int insertExt(@Nullable Ext ext) {
         Map<String, Object> map = new HashMap<>();
+        if (ext == null) {
+            return -1;
+        }
         map.put("GUID", ext.getGuid());
         map.put("EXT_ID", ext.getExtId());
         map.put("EXT_AMOUNT", ext.getExtAmount());
