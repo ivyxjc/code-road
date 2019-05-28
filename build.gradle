@@ -152,8 +152,7 @@ sonarqube {
 
 
 project("deep-in-log") {
-    dependencies {
-    }
+
 }
 
 project("hibernate-demo") {
@@ -163,6 +162,13 @@ project("hibernate-demo") {
         //lombok
         implementation group: 'org.projectlombok', name: 'lombok', version: lombok_version
         annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok_version
+    }
+}
+
+project("java-basic") {
+    dependencies {
+        implementation group: 'com.lmax', name: 'disruptor', version: '3.4.2'
+
     }
 }
 
