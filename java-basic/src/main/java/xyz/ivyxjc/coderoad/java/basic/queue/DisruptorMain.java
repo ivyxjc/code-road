@@ -22,7 +22,7 @@ public class DisruptorMain {
                 new YieldingWaitStrategy());
 
         // 设置消费者
-//        disruptor.handleEventsWith(new LogHandler());
+        disruptor.handleEventsWith(new LogHandler());
 
         // 启动 Disruptor
         disruptor.start();

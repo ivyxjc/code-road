@@ -168,6 +168,7 @@ project("hibernate-demo") {
 project("java-basic") {
     dependencies {
         implementation group: 'com.lmax', name: 'disruptor', version: '3.4.2'
+        implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.2'
 
     }
 }
