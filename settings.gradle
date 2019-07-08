@@ -7,8 +7,9 @@ include "ivy-benchmark"
 include "ivy-leaf"
 include "java-basic"
 include "kafka-demo"
+include "spring-cloud"
 include 'spring-security-demo'
-include 'vertx-demo'
 include "sort-samples"
 include "spring-transaction"
+include 'vertx-demo'
 
