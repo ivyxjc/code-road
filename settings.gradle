@@ -8,6 +8,7 @@ include "ivy-leaf"
 include "java-basic"
 include "kafka-demo"
 include "spring-cloud"
+include "spring-cloud-2"
 include 'spring-security-demo'
 include "sort-samples"
 include "spring-transaction"
