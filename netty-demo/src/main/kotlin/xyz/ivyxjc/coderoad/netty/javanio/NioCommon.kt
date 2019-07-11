@@ -1,6 +1,5 @@
 package xyz.ivyxjc.coderoad.netty.javanio
 
-import org.slf4j.LoggerFactory
 import xyz.ivyxjc.coderoad.netty.Base
 import java.io.File
 import java.io.FileOutputStream
@@ -21,4 +20,3 @@ fun buildOutputFile(filename: String, appendable: Boolean): FileOutputStream {
     return FileOutputStream(File(filePath), appendable)
 }
 
-fun <T> loggerFor(clz: Class<T>) = LoggerFactory.getLogger(clz)
