@@ -31,7 +31,7 @@ fun main() {
     }
 }
 
-class TestServerInitializer : ChannelInitializer<SocketChannel>() {
+private class TestServerInitializer : ChannelInitializer<SocketChannel>() {
 
     override fun initChannel(ch: SocketChannel?) {
         val pipeline = ch!!.pipeline()
@@ -40,7 +40,7 @@ class TestServerInitializer : ChannelInitializer<SocketChannel>() {
     }
 }
 
-class TestHttpServerHandler : SimpleChannelInboundHandler<HttpObject>() {
+private class TestHttpServerHandler : SimpleChannelInboundHandler<HttpObject>() {
     companion object {
         private val log = loggerFor(TestHttpServerHandler::class.java)
     }
@@ -62,7 +62,7 @@ class TestHttpServerHandler : SimpleChannelInboundHandler<HttpObject>() {
             val response = DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content)
             response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/plain")
             response.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes())
-            ctx!!.writeAndFlush(response)
+            ctx.writeAndFlush(response)
             ctx.channel().close()
         }
     }
