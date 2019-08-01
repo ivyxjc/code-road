@@ -8,7 +8,7 @@ class KafkaConsumerDemo {
     private val consumer: KafkaConsumer<String, String>
 
     companion object {
-        private val TOPIC = "ivy-leaf"
+        private val TOPIC = "ivy-test"
         private val log = loggerFor(ProducerDemo::class.java)
     }
 
@@ -26,7 +26,7 @@ class KafkaConsumerDemo {
             val records = consumer.poll(100)
             for (record in records) {
                 count++
-                log.debug("offset: {}, value: {}", record.offset(), record.value())
+                log.info("offset: {}, value: {}", record.offset(), record.value())
             }
         }
     }

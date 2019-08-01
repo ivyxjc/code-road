@@ -5,13 +5,12 @@ import org.apache.kafka.clients.producer.ProducerRecord
 import java.util.*
 import java.util.concurrent.locks.LockSupport
 
-
-class ProducerDemo {
+class PubgProducer {
 
     private val producer: KafkaProducer<String, String>
 
     companion object {
-        private val TOPIC = "ivy-test"
+        private val TOPIC = "pubg-transmission-dev"
         private val log = loggerFor(ProducerDemo::class.java)
     }
 
@@ -24,16 +23,19 @@ class ProducerDemo {
 
     fun produce() {
         var count = 0
-        while (count < 50) {
-            val value = "kafka, this is ${count}th message "
-            val future = producer.send(ProducerRecord(TOPIC, value))
-            count++
-            log.info("this is {}th message", count)
-            while (!future.isDone) {
-                LockSupport.parkNanos(1000000)
-                if (future.isDone) {
-                    println(future.get())
-                }
+        val value = """
+            {
+                "type":"player_name",
+                "value": "Huya_HeiMao-"
+            }
+        """.trimIndent()
+        val future = producer.send(ProducerRecord(TOPIC, value))
+//        count++
+//        log.info("this is {}th message", count)
+        while (!future.isDone) {
+            LockSupport.parkNanos(1000000)
+            if (future.isDone) {
+                println(future.get())
             }
         }
         producer.flush()
@@ -42,6 +44,6 @@ class ProducerDemo {
 }
 
 fun main() {
-    val producerDemo = ProducerDemo()
-    producerDemo.produce()
+    val producer = PubgProducer()
+    producer.produce()
 }
