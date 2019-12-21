@@ -79,7 +79,7 @@ private fun scatterDemo() {
 /**
  * this method will write to build directory
  */
-fun transferDemo() {
+private fun transferDemo() {
     val fromFile = buildFile("/data/fromFile.txt", "rw")
     val toFile = buildOutputFile("/data/toFile.txt", true)
 
