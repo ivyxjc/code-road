@@ -23,9 +23,11 @@ ext {
     kotlin_version = '1.3.11'
 
     commons_lang3_version = '3.7'
+    gson_version = '2.8.5'
     guava_version = '27.0.1-jre'
     h2_version = '1.4.197'
     hibernate_version = '5.4.0.Final'
+    jaxb_version = '2.3.2'
     jmh_version = '1.21'
     junit_version = '4.12'
     kafka_version = '2.2.0'
@@ -36,6 +38,13 @@ ext {
     okio_version = '2.3.0'
     slf4j_version = '1.7.25'
     spring_boot_version = '2.1.1.RELEASE'
+    spring_config_version = '2.1.3.RELEASE'
+    spring_config_server_version = '2.1.3.RELEASE'
+    spring_feign_version = '2.1.2.RELEASE'
+    spring_netflix_hystrix_version = '2.1.2.RELEASE'
+    spring_netflix_eureka_version = '2.1.2.RELEASE'
+    spring_netflix_ribbon_version = '2.1.2.RELEASE'
+    spring_netflix_zuul_version = '2.1.2.RELEASE'
     spring_kafka_version = '2.2.6.RELEASE'
 }
 
@@ -224,6 +233,43 @@ project("kafka-demo") {
         implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: spring_kafka_version
         implementation group: 'org.springframework.boot', name: 'spring-boot-starter', version: spring_boot_version
 
+
+    }
+}
+
+project("spring-cloud") {
+
+    apply plugin: "org.springframework.boot"
+
+    dependencies {
+        testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: spring_boot_version
+//        implementation group: 'org.springframework.boot', name: 'spring-boot', version: spring_boot_version
+//        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: spring_boot_version
+
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-ribbon', version: spring_netflix_ribbon_version
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-server', version: spring_netflix_eureka_version
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: spring_feign_version
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: spring_netflix_hystrix_version
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-zuul', version: spring_netflix_zuul_version
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: spring_config_version
+
+        implementation group: 'com.google.code.gson', name: 'gson', version: gson_version
+
+        runtime group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: jaxb_version
+    }
+}
+
+
+project("spring-cloud-2") {
+    dependencies {
+        testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: spring_boot_version
+
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-config-server', version: spring_config_server_version
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: spring_netflix_eureka_version
+
+        implementation group: 'com.google.code.gson', name: 'gson', version: gson_version
+
+        runtime group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: jaxb_version
 
     }
 }
